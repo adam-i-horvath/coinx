@@ -10,7 +10,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
 import About from './Pages/About';
 import Navbar from './Components/Navbar';
-import Tables from './Components/Tables';
+import Top100 from './Components/Top100';
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/chart" element={<Tables />} />
+              <Route path="/chart" element={<Top100 />} />
             </Routes>
           </Stack>
         </Container>
