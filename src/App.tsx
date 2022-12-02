@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Tables from './components/Tables';
+import Home from './Pages/Home';
 
 const darkTheme = createTheme({
   palette: {
@@ -14,7 +14,7 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <Tables />
+      <Home />
     </ThemeProvider>
   );
 }

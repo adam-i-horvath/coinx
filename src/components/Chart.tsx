@@ -13,6 +13,11 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 ChartJS.register(
   CategoryScale,
@@ -37,10 +42,32 @@ export const options = {
   },
 };
 
-const baseURL = 'https://api.coincap.io/v2/assets/bitcoin/history?interval=d1';
-
 const Chart = () => {
   const [posts, setPosts] = React.useState([]);
+  const [post, setPost] = React.useState([]);
+
+  const baseURL2 = 'https://api.coincap.io/v2/assets/';
+
+  const [age, setAge] = React.useState('bitcoin');
+  const baseURL =
+    'https://api.coincap.io/v2/assets/' + age + '/history?interval=d1';
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
+
+  React.useEffect(() => {
+    axios.get(baseURL2).then((response) => {
+      setPost(response.data.data);
+    });
+  }, []);
+
+  React.useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      return setPosts(response.data.data);
+    });
+  }, [baseURL]);
+  if (!post) return null;
 
   const labels = posts.map(({ date }) => moment.utc(date).format('YYYY/MM/DD'));
 
@@ -58,14 +85,27 @@ const Chart = () => {
       },
     ],
   };
-  React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      return setPosts(response.data.data);
-    });
-  }, []);
-  console.log(posts);
+
   return (
     <div>
+      <Box sx={{ minWidth: 120, margin: 5 }}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Coin</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={age}
+            label="Age"
+            onChange={handleChange}
+          >
+            {post.map(({ id, name }) => (
+              <MenuItem key={id} value={id}>
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
       <Line options={options} data={data} />
     </div>
   );

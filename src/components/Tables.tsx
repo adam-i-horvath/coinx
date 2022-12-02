@@ -8,11 +8,23 @@ import axios from 'axios';
 import { Box, Link } from '@mui/material';
 import Container from '@mui/material/Container';
 import Chart from './Chart';
+import InfoIcon from '@mui/icons-material/Info';
+import BasicModal from './Modal';
 
 const baseURL = 'https://api.coincap.io/v2/assets/';
 
 export default function Tables() {
   const [post, setPost] = React.useState([]);
+  const [count, setCount] = React.useState(null);
+
+  React.useEffect(() => {
+    if (count === null) {
+    } else {
+      // window.alert(count);
+      <BasicModal />;
+    }
+  }, [count]);
+
   const priceFormatUSD = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -56,6 +68,7 @@ export default function Tables() {
               <TableCell align="left">Supply</TableCell>
               <TableCell align="left">Volume (24Hr)</TableCell>
               <TableCell align="left">Change (24Hr)</TableCell>
+              <TableCell align="left">Info</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -102,6 +115,14 @@ export default function Tables() {
                   </TableCell>
                   <TableCell align="left">
                     {percentFormat.format(changePercent24Hr / 100)}
+                  </TableCell>
+                  <TableCell
+                    onClick={(e: React.MouseEvent<HTMLElement>) => {
+                      setCount(name);
+                    }}
+                    align="left"
+                  >
+                    <InfoIcon />
                   </TableCell>
                 </TableRow>
               )
