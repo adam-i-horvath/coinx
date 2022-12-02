@@ -36,3 +36,8 @@ export const appThemeMode = atom<ThemeMode>({
   // Now we need to add it to our effects array
   effects: [localStorageEffect('example-theme-mode')],
 });
+
+export const coinIDState = atom({
+  key: "coinId",
+  default: "bitcoin"
+})

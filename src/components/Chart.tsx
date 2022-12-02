@@ -19,6 +19,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import DataGridPremiumDemo from './CoinList';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { coinIDState } from '../app-atoms';
 
 ChartJS.register(
   CategoryScale,
@@ -46,15 +48,16 @@ export const options = {
 const Chart = () => {
   const [posts, setPosts] = React.useState([]);
   const [post, setPost] = React.useState([]);
+  const useCoinID = useRecoilValue(coinIDState);
+  const [coinID, setCoinID] = useRecoilState(coinIDState);
 
   const baseURL2 = 'https://api.coincap.io/v2/assets/';
 
-  const [age, setAge] = React.useState('bitcoin');
   const baseURL =
-    'https://api.coincap.io/v2/assets/' + age + '/history?interval=d1';
+    'https://api.coincap.io/v2/assets/' + useCoinID + '/history?interval=d1';
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+    setCoinID(event.target.value as string);
   };
 
   React.useEffect(() => {
@@ -96,8 +99,8 @@ const Chart = () => {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={age}
-            label="Age"
+            value={coinID}
+            label="Coin"
             onChange={handleChange}
           >
             {post.map(({ id, name }) => (

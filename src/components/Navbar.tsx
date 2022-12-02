@@ -38,7 +38,7 @@ export default function Navbar(props: Props) {
       <Divider />
       <Button href="/about">About</Button>
       <Divider />
-      <Button href="/chart">Chart</Button>
+      <Button href="/chart">Top 100</Button>
       <Divider />
     </Box>
   );
@@ -84,7 +84,7 @@ export default function Navbar(props: Props) {
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             <Button href="/">Home</Button>
             <Button href="/about">About</Button>
-            <Button href="/chart">Chart</Button>
+            <Button href="/chart">Top 100</Button>
           </Box>
         </Toolbar>
       </AppBar>
