@@ -1,14 +1,11 @@
 import React from 'react';
-import Navbar from '../Components/Navbar';
-import Tables from '../Components/Tables';
 
-type Props = {};
+import Chart from '../Components/Chart';
 
-const Home = (props: Props) => {
+const Home = () => {
   return (
     <div className="container">
-      <Navbar />
-      <Tables />
+      <Chart />
     </div>
   );
 };

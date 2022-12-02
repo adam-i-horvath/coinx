@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React from 'react';
+import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+
+type Props = {};
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -16,14 +18,13 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
+const ModalComponent = (props: Props) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>Open</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -41,4 +42,6 @@ export default function BasicModal() {
       </Modal>
     </div>
   );
-}
+};
+
+export default ModalComponent;

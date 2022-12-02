@@ -18,6 +18,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import DataGridPremiumDemo from './CoinList';
 
 ChartJS.register(
   CategoryScale,
@@ -88,7 +89,8 @@ const Chart = () => {
 
   return (
     <div>
-      <Box sx={{ minWidth: 120, margin: 5 }}>
+      <DataGridPremiumDemo />
+      <Box sx={{ minWidth: 120, margin: 10 }}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Coin</InputLabel>
           <Select
@@ -105,8 +107,10 @@ const Chart = () => {
             ))}
           </Select>
         </FormControl>
+        <Box sx={{ minWidth: 550, margin: 1 }}>
+          <Line options={options} data={data} />
+        </Box>
       </Box>
-      <Line options={options} data={data} />
     </div>
   );
 };
