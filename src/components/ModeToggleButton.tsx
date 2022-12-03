@@ -6,6 +6,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { appThemeMode, ThemeMode } from '../app-atoms';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { Link } from 'react-router-dom';
 
 interface DynamicIconProps {
   mode: ThemeMode;
@@ -33,20 +34,27 @@ function ModeToggleButton(): ReactElement {
       }}
     >
       <Typography
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+        component={Link}
+        to="/"
+        color="textPrimary"
+        sx={{
+          flexGrow: 1,
+          display: {
+            xs: 'hidden',
+            sm: 'block',
+            textDecoration: 'none',
+            boxShadow: 'none',
+          },
         }}
       >
-        [ Adam I. Horvath ]
-        <Button style={{ margin: '5px', minWidth: '5px' }}>
-          <GitHubIcon />
-        </Button>
-        <Button style={{ margin: '5px', minWidth: '5px' }}>
-          <LinkedInIcon />
-        </Button>
+        [ Adam I. Horvath]
       </Typography>
+      <Button style={{ margin: '5px', minWidth: '5px' }}>
+        <GitHubIcon />
+      </Button>
+      <Button style={{ margin: '5px', minWidth: '5px' }}>
+        <LinkedInIcon />
+      </Button>
       <Button onClick={toggleMode} sx={{ width: 140, height: 40 }}>
         <DynamicIcon mode={mode} /> &nbsp;{mode + ' mode'}
       </Button>

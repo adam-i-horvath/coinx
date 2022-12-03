@@ -72,7 +72,6 @@ export default function CoinList() {
   ];
 
   const handleRowClick: GridEventListener<'rowClick'> = (params) => {
-    console.log(params.row.id);
     setCoinID(params.row.id);
   };
 

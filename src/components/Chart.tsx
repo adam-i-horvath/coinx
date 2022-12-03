@@ -73,7 +73,7 @@ const Chart = () => {
   }, [baseURL]);
   if (!post) return null;
 
-  const labels = posts.map(({ date }) => moment.utc(date).format('YYYY/MM/DD'));
+  const labels = posts.map(({ date }) => moment.utc(date).format('YY/MM/DD'));
 
   const data: ChartData<'line', { date: Date; priceUsd: number }[]> = {
     labels,

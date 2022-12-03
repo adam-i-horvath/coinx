@@ -9,6 +9,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
 interface Props {
   /**
@@ -38,7 +39,7 @@ export default function Navbar(props: Props) {
       <Divider />
       <Button href="/about">About</Button>
       <Divider />
-      <Button href="/chart">Top 100</Button>
+      <Button href="/top100">Top 100</Button>
       <Divider />
     </Box>
   );
@@ -71,20 +72,22 @@ export default function Navbar(props: Props) {
             sx={{
               flexGrow: 1,
               display: {
-                xs: 'hidden',
-                sm: 'block',
                 textDecoration: 'none',
                 boxShadow: 'none',
                 margin: 20,
+                alignItems: 'center',
+                justifyContent: 'center',
+                display: 'flex',
               },
             }}
           >
-            COINX
+            COIN
+            <CancelOutlinedIcon sx={{ fontSize: '45px' }} />
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             <Button href="/">Home</Button>
             <Button href="/about">About</Button>
-            <Button href="/chart">Top 100</Button>
+            <Button href="/top100">Top 100</Button>
           </Box>
         </Toolbar>
       </AppBar>
