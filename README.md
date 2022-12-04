@@ -1,5 +1,4 @@
 # **crypto currency analysis site**
-
-API: https://coincap.io/ 
-DEMO: https://coinx-learningproject.netlify.app/ 
-REACT, MUI, REST API
+**API: https://coincap.io/ <br />
+**DEMO: https://coinx-learningproject.netlify.app/** <br />  <br /> 
+**REACT, MUI, REST API**** <br />
