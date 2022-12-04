@@ -8,14 +8,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window?: () => Window;
 }
 
@@ -64,26 +58,6 @@ export default function Navbar(props: Props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h3"
-            component={Link}
-            to="/"
-            color="textPrimary"
-            sx={{
-              flexGrow: 1,
-              display: {
-                textDecoration: 'none',
-                boxShadow: 'none',
-                margin: 20,
-                alignItems: 'center',
-                justifyContent: 'center',
-                display: 'flex',
-              },
-            }}
-          >
-            COIN
-            <CancelOutlinedIcon sx={{ fontSize: '45px' }} />
-          </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             <Button href="/">Home</Button>
             <Button href="/about">About</Button>

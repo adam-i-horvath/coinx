@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Chart from '../Components/Chart';
+import Chart from '../Components/Chart/Chart';
 
 const Home = () => {
   return (

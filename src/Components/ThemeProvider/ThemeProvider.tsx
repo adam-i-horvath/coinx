@@ -1,7 +1,7 @@
 import React, { ReactElement, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-import { appThemeMode } from '../app-atoms';
+import { appThemeMode } from '../../app-atoms';
 
 interface Props {
   children: ReactElement;

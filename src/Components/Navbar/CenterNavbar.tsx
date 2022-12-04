@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { Button, Typography } from '@mui/material';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import { appThemeMode, ThemeMode } from '../app-atoms';
+import { appThemeMode, ThemeMode } from '../../app-atoms';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Link } from 'react-router-dom';
@@ -29,7 +29,7 @@ function ModeToggleButton(): ReactElement {
       style={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evently',
         width: '100%',
       }}
     >
@@ -44,15 +44,24 @@ function ModeToggleButton(): ReactElement {
             sm: 'block',
             textDecoration: 'none',
             boxShadow: 'none',
+            fontSize: '3rem',
           },
         }}
       >
-        [ Adam I. Horvath]
+        COINX
       </Typography>
-      <Button style={{ margin: '5px', minWidth: '5px' }}>
+      <Button
+        href="https://github.com/adam-i-horvath"
+        target="__blank"
+        style={{ margin: '5px', minWidth: '5px' }}
+      >
         <GitHubIcon />
       </Button>
-      <Button style={{ margin: '5px', minWidth: '5px' }}>
+      <Button
+        href="https://www.linkedin.com/in/horvathadamistvan/"
+        target="__blank"
+        style={{ margin: '5px', minWidth: '5px' }}
+      >
         <LinkedInIcon />
       </Button>
       <Button onClick={toggleMode} sx={{ width: 140, height: 40 }}>

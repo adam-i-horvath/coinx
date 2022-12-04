@@ -12,16 +12,14 @@ import axios from 'axios';
 import clsx from 'clsx';
 import { Box } from '@mui/material';
 import { useRecoilState } from 'recoil';
-import { coinIDState } from '../app-atoms';
-import BasicModal from './Modal';
+import { coinIDState } from '../../app-atoms';
 
 const baseURL2 = 'https://api.coincap.io/v2/assets/';
 
 export default function CoinList() {
   const [posts, setPosts] = React.useState([]);
-  const [pageSize, setPageSize] = React.useState<number>(10);
+  const [pageSize, setPageSize] = React.useState<number>(3);
   const [, setCoinID] = useRecoilState(coinIDState);
-  const [showModal, setShowModal] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     axios.get(baseURL2).then((response) => {
@@ -34,41 +32,11 @@ export default function CoinList() {
   const columns: GridColDef[] = [
     { field: 'name', headerName: 'Name', width: 150 },
     { field: 'rank', headerName: 'Rank', width: 100 },
-    { field: 'symbol', headerName: 'Symbol', width: 100 },
+    { field: 'symbol', headerName: 'Symbol', width: 150 },
     {
       field: 'priceUsd',
       headerName: 'Price (USD)',
-      width: 120,
-      valueFormatter: (params: GridValueFormatterParams<number>) => {
-        if (params.value == null) {
-          return '';
-        }
-
-        const valueFormatted = Number(params.value).toLocaleString();
-        return `${valueFormatted} $`;
-      },
-    },
-    {
-      field: 'marketCapUsd',
-      headerName: 'Market Cap',
-      width: 120,
-      valueFormatter: (params: GridValueFormatterParams<number>) => {
-        if (params.value == null) {
-          return '';
-        }
-
-        const valueFormatted = Number(params.value).toLocaleString('en-US', {
-          style: 'currency',
-          currency: 'USD',
-          maximumFractionDigits: 2,
-          notation: 'compact',
-        });
-        return `${valueFormatted}`;
-      },
-    },
-    {
-      field: 'vwap24Hr',
-      headerName: 'VWAP (24Hr)',
+      flex: 1,
       width: 150,
       valueFormatter: (params: GridValueFormatterParams<number>) => {
         if (params.value == null) {
@@ -77,47 +45,12 @@ export default function CoinList() {
 
         const valueFormatted = Number(params.value).toLocaleString();
         return `${valueFormatted} $`;
-      },
-    },
-    {
-      field: 'supply',
-      headerName: 'Supply',
-      width: 100,
-      valueFormatter: (params: GridValueFormatterParams<number>) => {
-        if (params.value == null) {
-          return '';
-        }
-
-        const valueFormatted = Number(params.value).toLocaleString('en-US', {
-          style: 'currency',
-          currency: 'USD',
-          maximumFractionDigits: 1,
-          notation: 'compact',
-        });
-        return `${valueFormatted}`;
-      },
-    },
-    {
-      field: 'volumeUsd24Hr',
-      headerName: 'Volume (24Hr)',
-      width: 150,
-      valueFormatter: (params: GridValueFormatterParams<number>) => {
-        if (params.value == null) {
-          return '';
-        }
-
-        const valueFormatted = Number(params.value).toLocaleString('en-US', {
-          style: 'currency',
-          currency: 'USD',
-          maximumFractionDigits: 3,
-          notation: 'compact',
-        });
-        return `${valueFormatted}`;
       },
     },
     {
       field: 'changePercent24Hr',
       headerName: 'Change (24Hr)',
+      flex: 1,
       width: 150,
       valueFormatter: (params: GridValueFormatterParams<number>) => {
         if (params.value == null) {
@@ -141,15 +74,14 @@ export default function CoinList() {
   ];
 
   const handleRowClick: GridEventListener<'rowClick'> = (params) => {
-    console.log(params.row.id);
     setCoinID(params.row.id);
-    setShowModal(true);
   };
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ height: 250, width: '100%' }}>
       <Box
         sx={{
+          height: 300,
           width: '100%',
           '& .super-app-theme--cell': {
             backgroundColor: 'rgba(224, 183, 60, 0.55)',
@@ -166,20 +98,19 @@ export default function CoinList() {
           },
         }}
       >
-        <div style={{ height: 650, width: '100%' }}>
+        <Box style={{ height: 300, width: '100%' }}>
           <DataGrid
             rows={rows}
             columns={columns}
             components={{ Toolbar: GridToolbar }}
             pageSize={pageSize}
             onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-            rowsPerPageOptions={[10, 25, 50, 100]}
+            rowsPerPageOptions={[3, 10, 20]}
             pagination
             onRowClick={handleRowClick}
           />
-        </div>
+        </Box>
       </Box>
-      {showModal ? <BasicModal setShowModal={setShowModal} /> : null}
     </div>
   );
 }

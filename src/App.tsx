@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
 import { Container, Stack } from '@mui/material';
-import AppThemeProvider from './Components/ThemeProvider';
-import ModeToggleButton from './Components/ModeToggleButton';
+import AppThemeProvider from './Components/ThemeProvider/ThemeProvider';
+import ModeToggleButton from './Components/Navbar/CenterNavbar';
 
 import { Route, Routes } from 'react-router-dom';
 
 import Home from './Pages/Home';
 import About from './Pages/About';
-import Navbar from './Components/Navbar';
-import Top100 from './Components/Top100';
+import Navbar from './Components/Navbar/Navbar';
+import Top100 from './Components/Top100/Top100';
 import Details from './Pages/Details';
 
 function App() {

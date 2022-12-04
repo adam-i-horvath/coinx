@@ -18,9 +18,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import DataGridPremiumDemo from './CoinList';
+import DataGridPremiumDemo from '../CoinList/CoinList';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { coinIDState } from '../app-atoms';
+import { coinIDState } from '../../app-atoms';
+import { options } from './ChartDetails';
 
 ChartJS.register(
   CategoryScale,
@@ -32,55 +33,41 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    title: {
-      display: true,
-      text: '1Y Chart',
-    },
-    legend: {
-      display: false,
-    },
-  },
-};
-
 const Chart = () => {
-  const [posts, setPosts] = React.useState([]);
-  const [post, setPost] = React.useState([]);
+  const [date, setDate] = React.useState([]);
+  const [apiData, setApiData] = React.useState([]);
   const useCoinID = useRecoilValue(coinIDState);
   const [coinID, setCoinID] = useRecoilState(coinIDState);
 
-  const baseURL2 = 'https://api.coincap.io/v2/assets/';
-
-  const baseURL =
-    'https://api.coincap.io/v2/assets/' + useCoinID + '/history?interval=d1';
+  const COIN_ASSETS = 'https://api.coincap.io/v2/assets/';
+  const COIN_ASSETS_HISTORY = `https://api.coincap.io/v2/assets/${useCoinID}/history?interval=d1`;
 
   const handleChange = (event: SelectChangeEvent) => {
     setCoinID(event.target.value as string);
   };
 
   React.useEffect(() => {
-    axios.get(baseURL2).then((response) => {
-      setPost(response.data.data);
+    axios.get(COIN_ASSETS).then((response) => {
+      setApiData(response.data.data);
     });
   }, []);
 
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      return setPosts(response.data.data);
+    axios.get(COIN_ASSETS_HISTORY).then((response) => {
+      return setDate(response.data.data);
     });
-  }, [baseURL]);
-  if (!post) return null;
+  }, [COIN_ASSETS_HISTORY]);
 
-  const labels = posts.map(({ date }) => moment.utc(date).format('YY/MM/DD'));
+  if (!apiData) return null;
+
+  const labels = date.map(({ date }) => moment.utc(date).format('YY/MM/DD'));
 
   const data: ChartData<'line', { date: Date; priceUsd: number }[]> = {
     labels,
     datasets: [
       {
         label: '',
-        data: posts.map(({ priceUsd }) => priceUsd),
+        data: date.map(({ priceUsd }) => priceUsd),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
         borderWidth: 1,
@@ -103,7 +90,7 @@ const Chart = () => {
             label="Coin"
             onChange={handleChange}
           >
-            {post.map(({ id, name }) => (
+            {apiData.map(({ id, name }) => (
               <MenuItem key={id} value={id}>
                 {name}
               </MenuItem>
